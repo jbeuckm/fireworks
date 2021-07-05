@@ -28,7 +28,7 @@ let particles: Particle[] = []
 
 const explode = (particle: Particle, particles: Particle[]) => {
   for (let i = 0; i < 100; i++) {
-    const speed = 1 + Math.random()
+    const speed = 2 + 2 * Math.random()
     const angle = Math.random() * 2 * Math.PI
     particles.push(
       new Particle({
@@ -65,14 +65,14 @@ const frame = () => {
         } else {
           explode(particle, nextParticles)
         }
-        ctx.fillRect(particle.x, height - particle.y, 5, 5)
+        ctx.fillRect(particle.x, height - particle.y, 20, 20)
         break
 
       case 'ash':
         if (particle.y > 0) {
           nextParticles.push(particle)
         }
-        ctx.fillRect(particle.x, height - particle.y, 2, 2)
+        ctx.fillRect(particle.x, height - particle.y, 3, 3)
         break
     }
   }
@@ -84,19 +84,52 @@ const frame = () => {
 
 requestAnimationFrame(frame)
 
-setInterval(() => {
+const colors = ['#FF00FF', 'blue', 'purple']
+
+// setInterval(() => {
+//   particles.push(
+//     new Particle({
+//       x: Math.random() * width,
+//       y: 10,
+//       vx: Math.random() * 1 - 0.5,
+//       vy: 4 + 2.5 * Math.random(),
+//       color: colors[~~(Math.random() * 3)],
+//       brightness: 1,
+//       type: 'shell',
+//     })
+//   )
+// }, 1000)
+
+document.addEventListener('keydown', logKey)
+
+const launch = (color: string) => {
   particles.push(
     new Particle({
       x: Math.random() * width,
       y: 10,
       vx: Math.random() * 1 - 0.5,
       vy: 4 + 2.5 * Math.random(),
-      color: chroma.random().hex(),
+      color: color,
       brightness: 1,
       type: 'shell',
     })
   )
-}, 100)
+}
+
+function logKey(e: KeyboardEvent) {
+  console.log(e.code)
+  switch (e.code) {
+    case 'KeyP':
+      launch('#ff00ff')
+      break
+    case 'KeyG':
+      launch('#00ff00')
+      break
+    case 'KeyB':
+      launch('#0000ff')
+      break
+  }
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

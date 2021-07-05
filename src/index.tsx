@@ -65,7 +65,7 @@ const frame = () => {
         } else {
           explode(particle, nextParticles)
         }
-        ctx.fillRect(particle.x, height - particle.y, 20, 20)
+        ctx.fillRect(particle.x, height - particle.y, 5, 5)
         break
 
       case 'ash':
@@ -86,50 +86,50 @@ requestAnimationFrame(frame)
 
 const colors = ['#FF00FF', 'blue', 'purple']
 
-// setInterval(() => {
-//   particles.push(
-//     new Particle({
-//       x: Math.random() * width,
-//       y: 10,
-//       vx: Math.random() * 1 - 0.5,
-//       vy: 4 + 2.5 * Math.random(),
-//       color: colors[~~(Math.random() * 3)],
-//       brightness: 1,
-//       type: 'shell',
-//     })
-//   )
-// }, 1000)
-
-document.addEventListener('keydown', logKey)
-
-const launch = (color: string) => {
+setInterval(() => {
   particles.push(
     new Particle({
       x: Math.random() * width,
       y: 10,
       vx: Math.random() * 1 - 0.5,
       vy: 4 + 2.5 * Math.random(),
-      color: color,
+      color: chroma.random().hex(),
       brightness: 1,
       type: 'shell',
     })
   )
-}
+}, 1000)
 
-function logKey(e: KeyboardEvent) {
-  console.log(e.code)
-  switch (e.code) {
-    case 'KeyP':
-      launch('#ff00ff')
-      break
-    case 'KeyG':
-      launch('#00ff00')
-      break
-    case 'KeyB':
-      launch('#0000ff')
-      break
-  }
-}
+// document.addEventListener('keydown', logKey)
+//
+// const launch = (color: string) => {
+//   particles.push(
+//     new Particle({
+//       x: Math.random() * width,
+//       y: 10,
+//       vx: Math.random() * 1 - 0.5,
+//       vy: 4 + 2.5 * Math.random(),
+//       color: color,
+//       brightness: 1,
+//       type: 'shell',
+//     })
+//   )
+// }
+
+// function logKey(e: KeyboardEvent) {
+//   console.log(e.code)
+//   switch (e.code) {
+//     case 'KeyP':
+//       launch('#ff00ff')
+//       break
+//     case 'KeyG':
+//       launch('#00ff00')
+//       break
+//     case 'KeyB':
+//       launch('#0000ff')
+//       break
+//   }
+// }
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -20,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "yarn build && rimraf docs && mv build docs",
+    "deploy": "PUBLIC_URL=fireworks yarn build && rimraf docs && mv build docs",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
